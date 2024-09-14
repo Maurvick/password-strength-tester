@@ -26,27 +26,38 @@ export class AppComponent {
   constructor() {}
 
   onPasswordChange(password: string): void {
-    if (password.length > 0) {
-      this.password = password;
-      this.scanStr(this.password);
-    }
+    this.password = password;
+    this.scanStr(this.password);
   }
 
   scanStr(str: string) {
+    if (str) {
+      // reset flags when string is changed
+      this.resetFlags();
+    }
     for (let i = 0; i < str.length; i++) {
       const char = str[i];
       const charCode = str.charCodeAt(i);
-      if (char[i].toLowerCase() !== char[i].toUpperCase()) {
+      if (char.toLowerCase() !== char.toUpperCase()) {
         this.hasLetters = true;
       }
       if (this.isDigit(charCode)) {
         this.hasDigits = true;
       }
+      if (this.isSymbol(char)) {
+        this.hasSymbols = true;
+      }
     }
   }
 
   isDigit(charCode: number) {
+    // has digits from 0-9
     return charCode >= 48 && charCode <= 57;
+  }
+
+  isSymbol(char: string) {
+    const symbolRegex = /[!@#$%^&*(),.?":{}|<>]/;
+    return symbolRegex.test(char);
   }
 
   resetFlags() {
@@ -65,7 +76,11 @@ export class AppComponent {
     if (this.hasLetters && this.hasDigits && this.hasSymbols) {
       return 'strong';
     }
-    if (this.hasLetters && this.hasDigits) {
+    if (
+      (this.hasLetters && this.hasSymbols) ||
+      (this.hasLetters && this.hasDigits) ||
+      (this.hasDigits && this.hasSymbols)
+    ) {
       return 'medium';
     }
     if (this.hasLetters || this.hasDigits || this.hasSymbols) {
