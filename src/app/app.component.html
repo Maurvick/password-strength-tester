@@ -1,15 +1,18 @@
-<div>
+<div class="container">
   <h1>Password Strength Tester</h1>
   <div>
-    <label for="password">Password:</label>
     <input
       name="password"
       class="password"
-      [(ngModel)]="password"
-      (ngModelChange)="onPasswordChange($event)"
+      type="password"
+      placeholder="Enter password..."
+      (input)="onPasswordChange($event)"
     />
   </div>
-  <div *ngIf="password">
+  <div class="sections">
+    <div [ngClass]="section1"></div>
+    <div [ngClass]="section2"></div>
+    <div [ngClass]="section3"></div>
     <p>{{ getPasswordStrength() }}</p>
   </div>
 </div>

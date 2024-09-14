@@ -1,0 +1,40 @@
+.container {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+input {
+  width: 300px;
+}
+
+.sections {
+  display: flex;
+  margin-top: 15px;
+  justify-content: space-between;
+  width: 300px;
+}
+
+.sections div {
+  width: 33%;
+  height: 5px;
+  margin: 5px;
+}
+
+.gray {
+  background-color: gray;
+}
+
+.red {
+  background-color: red;
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+.green {
+  background-color: green;
+}
